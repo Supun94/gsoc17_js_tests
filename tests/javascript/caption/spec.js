@@ -86,4 +86,13 @@ define(['jquery', 'testsRoot/caption/spec-setup', 'jasmineJquery'], function ($)
 			});
 		});
 	});
+
+    describe('JCaption empty string with whitespaces', function () {
+        beforeAll(function () {
+            new Joomla.JCaption('#empty img.test');
+        });
+        it('Should not have a empty string with whitespace', function () {
+            expect($('#empty')).not.toContain(' ');
+        });
+    });
 });
