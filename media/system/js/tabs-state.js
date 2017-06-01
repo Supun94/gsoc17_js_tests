@@ -7,8 +7,9 @@
  * JavaScript behavior to allow selected tab to be remained after save or page reload
  * keeping state in sessionStorage
  */
+Joomla = window.Joomla || {};
 
-jQuery(function($) {
+(function(Joomla) {
     var loadTabs = function() {
         function saveActiveTab(href) {
             // Remove the old entry if exists, key is always dependant on the url
@@ -28,20 +29,20 @@ jQuery(function($) {
         }
 
         function activateTab(href) {
-            $('a[data-toggle="tab"][href="' + href + '"]').tab('show');
+            var activeTab = document.querySelectorAll('a[data-toggle="tab"][href="' + href + '"]').tab('show');
         }
 
         function hasTab(href) {
-            return $('a[data-toggle="tab"][href="' + href + '"]').length;
+            return document.querySelectorAll('a[data-toggle="tab"][href="' + href + '"]').length;
         }
 
         // Array with active tabs hrefs
         var activeTabsHrefs = JSON.parse(sessionStorage.getItem(window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').replace(/&[a-zA-Z-_]+=[0-9]+/, '')));
 
         // jQuery object with all tabs links
-        var $tabs = $('a[data-toggle="tab"]');
+        var tabs = document.querySelectorAll('a[data-toggle="tab"]');
 
-        $tabs.on('click', function(e) {
+        tabs.on('click', function(e) {
             saveActiveTab($(e.target).attr('href'));
         });
 
@@ -72,11 +73,11 @@ jQuery(function($) {
         } else {
             $tabs.parents('ul').each(function(index, ul) {
                 // If no tabs is saved, activate first tab from each tab set and save it
-                var href = $(ul).find('a').first().tab('show').attr('href');
+                var href =  $(ul).find('a').first().tab('show').attr('href');
                 saveActiveTab(href);
             });
         }
     };
 
     setTimeout(loadTabs, 100);
-});
+})(Joomla);
