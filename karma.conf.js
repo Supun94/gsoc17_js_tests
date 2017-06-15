@@ -34,10 +34,16 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'**/system/js/*.js': ['coverage']
+			'**/system/js/*.js': ['coverage'],
+			'**/media/com_media/*.js': ['browserify']
 		},
 
-		// coverage reporter configuration
+        browserify: {
+            debug: true, // debug=true to generate source maps
+            transform: [ 'vueify' ]
+        },
+
+        // coverage reporter configuration
 		coverageReporter: {
 			type : 'html',
 			dir : 'build/coverage-js/'
