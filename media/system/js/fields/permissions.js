@@ -1,6 +1,8 @@
 /**
  * Function to send Permissions via Ajax to Com-Config Application Controller
  */
+Joomla = window.Joomla || {};
+
 function sendPermissions(event) {
 	// set the icon while storing the values
 	var icon = document.getElementById('icon_' + this.id);
@@ -62,12 +64,10 @@ function sendPermissions(event) {
 	Joomla.removeMessages();
 
 	// doing ajax request
-	jQuery.ajax({
-		method: "POST",
-		url: document.getElementById('permissions-sliders').getAttribute('data-ajaxuri'),
-		data: permission_data,
-		datatype: 'json'
-	})
+    var request = new XMLHttpRequest();
+    request.open("POST", document.getElementById('permissions-sliders').getAttribute('data-ajaxuri'), true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.send('')
 	.fail(function (jqXHR, textStatus, error) {
 		// Remove the spinning icon.
 		icon.removeAttribute('style');
@@ -89,7 +89,7 @@ function sendPermissions(event) {
 			{
 				icon.setAttribute('class', 'icon-save');
 
-				jQuery(event.target).parents().next("td").find("span")
+				document.getElementById(event.target).next("td").find("span")
 					.removeClass()
 					.addClass(response['data']['class'])
 					.html(response.data.text);
