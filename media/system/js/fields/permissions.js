@@ -3,7 +3,7 @@
  */
 Joomla = window.Joomla || {};
 
-function sendPermissions(event) {
+(function sendPermissions(event, Joomla) {
 	// set the icon while storing the values
 	var icon = document.getElementById('icon_' + this.id);
 	icon.removeAttribute('class');
@@ -66,7 +66,7 @@ function sendPermissions(event) {
 	// doing ajax request
     var request = new XMLHttpRequest();
     request.open("POST", document.getElementById('permissions-sliders').getAttribute('data-ajaxuri'), true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.send('')
 	.fail(function (jqXHR, textStatus, error) {
 		// Remove the spinning icon.
@@ -113,7 +113,7 @@ function sendPermissions(event) {
 			window.scrollTo(0, 0);
 		}
 	});
-}
+}) (event, Joomla);
 
 /**
  * Function to get parameters out of the url
