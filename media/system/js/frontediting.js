@@ -7,7 +7,9 @@
  * JavaScript behavior to add front-end hover edit icons with tooltips for modules and menu items.
  *
  */
-(function($) {
+Joomla = window.Joomla || {};
+
+(function(Joomla){
 
 	$.fn.extend({
 		/**
@@ -43,7 +45,7 @@
 		}
 	});
 
-	$(document).ready(function () {
+	document.addEventListener("DOMContentLoaded", function(event) {
 
 		// Tooltip maximal dimensions for intelligent placement:
 		var actualWidth = 200;
@@ -104,11 +106,11 @@
 
 		// Modules edit icons:
 
-		$('.jmoddiv').on({
+		document.getElementsByClassName('jmoddiv').on({
 			mouseenter: function() {
 
 				// Get module editing URL and tooltip for module edit:
-				var moduleEditUrl = $(this).data('jmodediturl');
+				var moduleEditUrl = event.target.data('jmodediturl');
 				var moduleTip = $(this).data('jmodtip');
                 var moduleTarget = $(this).data('target');
 
@@ -197,4 +199,4 @@
 			}
 		});
 	});
-})(jQuery);
+})(Joomla);
