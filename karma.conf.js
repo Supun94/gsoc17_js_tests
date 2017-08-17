@@ -23,9 +23,9 @@ module.exports = function (config) {
 			{pattern: 'media/system/js/fields/*.js', included: false},
 			{pattern: 'media/system/js/fields/calendar-locales/*.js', included: false},
 			{pattern: 'media/system/js/fields/calendar-locales/date/gregorian/*.js', included: false},
-			{pattern: 'tests/javascript/**/fixture.html', included: false},
-			{pattern: 'tests/javascript/**/spec.js', included: false},
-			{pattern: 'tests/javascript/**/spec-setup.js', included: false},
+			{pattern: 'tests/javascript/core/fixtures/fixture.html', included: false},
+			{pattern: 'tests/javascript/core/spec.js', included: false},
+			{pattern: 'tests/javascript/core/spec-setup.js', included: false},
 			{pattern: 'images/*.png', included: false},
 
 			'tests/javascript/test-main.js'

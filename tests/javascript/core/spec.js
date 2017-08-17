@@ -130,7 +130,7 @@ define(['jquery', 'testsRoot/core/spec-setup', 'jasmineJquery'], function ($) {
 		it('should not set name of input elements with invalid name to new token', function () {
 			expect($('.replace-tokens-input #invalid-name').name).not.toEqual(newToken);
 		});
-	});
+	}); //done
 
 	describe('Core Joomla.checkAll', function () {
 		var form = document.getElementById('check-all-form');
@@ -238,6 +238,23 @@ define(['jquery', 'testsRoot/core/spec-setup', 'jasmineJquery'], function ($) {
 		});
 		it('should set form.filter_order_Dir.value = dir', function () {
 			expect(this.form.filter_order_Dir.value).toEqual('dir')
+		});
+	});
+
+	describe('Core Joomla.submitbutton', function () {
+		var form = document.querySelectorAll( 'form.form-validate' );
+		console.log("1"+JSON.stringify(form))
+		form.task = {};
+
+		beforeEach(function () {
+			spyOnEvent('#adminForm', 'submit');
+			form.removeChild = jasmine.createSpy('removeChild');
+			document.formvalidator = new JFormValidator();
+			$('#applyBtn').click();
+		});
+
+		it('should form value greater than 0', function () {
+			expect(form.length).toBeGreaterThan(0);
 		});
 	});
 });
