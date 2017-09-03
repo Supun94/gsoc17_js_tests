@@ -147,12 +147,14 @@ Joomla = window.Joomla || {};
 				mouseenter: function () {
 
 					// Get module editing URL and tooltip for module edit:
-					var moduleEditUrl = event.target.data('jmodediturl');
-					var moduleTip     = event.target.data('jmodtip');
-					var moduleTarget  = event.target.data('target');
+					var moduleEditUrl = event.target.getAttribute('data-jmodediturl');
+					var moduleTip     = event.target.getAttribute('data-jmodtip');
+					var moduleTarget  = event.target.getAttribute('data-target');
 
 					// Stop timeout on previous tooltip and remove it:
-					$('body>.btn.jmodedit').clearQueue().tooltip('dispose').remove();
+					var ele = document.getElementById("body");
+					var childEle = ele.querySelectorAll(":scope > .btn.jmodedit");
+					clearQueue().tooltip('dispose').remove();
 
 					// Add editing button with tooltip:
 					$(this).addClass('jmodinside')
@@ -193,25 +195,25 @@ Joomla = window.Joomla || {};
 		Joomla.frontEditing.mouseClick = function(elements) {
 			var activePopover = null;
 
-			elements.on({
+			elements.addEventListener({
 				mouseenter: function () {
 
 					// Get menu ItemId from the item-nnn class of the li element of the menu:
-					var itemids = /\bitem-(\d+)\b/.exec($(this).attr('class'));
+					var itemids = /\bitem-(\d+)\b/.exec(event.target.getAttribute('class'));
 					if (typeof itemids[1] == 'string') {
 						// Find module editing URL from enclosing module:
-						var enclosingModuleDiv = $(this).closest('.jmoddiv');
-						var moduleEditUrl = enclosingModuleDiv.data('jmodediturl');
+						var enclosingModuleDiv = event.target.closest('.jmoddiv');
+						var moduleEditUrl = enclosingModuleDiv.getAttribute('data-jmodediturl');
 						// Transform module editing URL into Menu Item editing url:
 						var menuitemEditUrl = moduleEditUrl.replace(/\/index.php\?option=com_config&view=modules([^\d]+).+$/, '/administrator/index.php?option=com_menus&view=item&layout=edit$1' + itemids[1]);
 
 					}
 
 					// Get tooltip for menu items from enclosing module
-					var menuEditTip = enclosingModuleDiv.data('jmenuedittip').replace('%s', itemids[1]);
+					var menuEditTip = enclosingModuleDiv.getAttribute('data-jmenuedittip').replace('%s', itemids[1]);
 
-					var content = $('<div><a class="btn jfedit-menu" href="#" target="_blank"><span class="icon-edit"></span></a></div>');
-					content.children('a.jfedit-menu').prop('href', menuitemEditUrl).prop('title', menuEditTip);
+					var content = document.querySelector('<div><a class="btn jfedit-menu" href="#" target="_blank"><span class="icon-edit"></span></a></div>');
+					content.querySelectorAll('> a.jfedit-menu').prop('href', menuitemEditUrl).prop('title', menuEditTip);
 
 					if (activePopover) {
 						$(activePopover).popover('hide');
