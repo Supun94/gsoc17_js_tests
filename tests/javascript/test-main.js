@@ -28,7 +28,8 @@ require.config({
 		'text': 'node_modules/text/text',
 		'fields': 'media/system/js/fields',
 		'calLang': 'media/system/js/fields/calendar-locales/en',
-		'calDate': 'media/system/js/fields/calendar-locales/date/gregorian/date-helper'
+		'calDate': 'media/system/js/fields/calendar-locales/date/gregorian/date-helper',
+		'dragula': 'media/vendor/dragula/js/dragula.js'
 	},
 
 	shim: {
@@ -49,6 +50,9 @@ require.config({
 		},
 		'libs/fields/calendar': {
 			deps: ['calLang', 'calDate']
+		},
+		'libs/draggable': {
+			deps: ['dragula']
 		}
 	},
 

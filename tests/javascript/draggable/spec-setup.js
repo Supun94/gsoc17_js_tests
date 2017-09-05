@@ -8,7 +8,9 @@
  * @since       3.6.3
  * @version     1.0.0
  */
+//D:\xampp\htdocs\gsoc\test-permission\gsoc17_js_tests\media\system\js\draggable.js
+//D:\xampp\htdocs\gsoc\test-permission\gsoc17_js_tests\media/vendor/dragula/js/dragula.js
 
-define(['jquery', 'text!testsRoot/draggable/fixtures/fixture.html', 'libs/draggable'], function ($, fixture) {
+define(['jquery', 'text!testsRoot/draggable/fixtures/fixture.html', 'libs/draggable', 'dragula'], function ($, fixture) {
 	$('body').append(fixture);
 });
